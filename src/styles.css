@@ -1,0 +1,232 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-navy: var(--navy);
+  --color-sky: var(--sky);
+  --color-cream: var(--cream);
+  --color-ivory: var(--ivory);
+  --color-clay: var(--clay);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-display: "Cinzel", "Trajan Pro", serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+:root {
+  --radius: 0.125rem;
+
+  /* Warm ivory + coffee-brown + antique-gold palette (Evolve Back editorial) */
+  --ivory: oklch(0.97 0.012 75);
+  --cream: oklch(0.945 0.015 75);
+  --navy: oklch(0.30 0.05 55);   /* warm espresso / deep coffee brown (dark text & headers) */
+  --clay: oklch(0.55 0.06 40);
+  --sky:  oklch(0.92 0.03 75);   /* warm sand — used only for subtle ambient gradients */
+  --gold: oklch(0.72 0.12 85);   /* antique gold — primary accent */
+  --gold-foreground: oklch(0.25 0.05 55);
+
+  --background: var(--ivory);
+  --foreground: oklch(0.25 0.06 55);
+
+  --card: oklch(0.99 0.008 75);
+  --card-foreground: oklch(0.25 0.06 55);
+  --popover: oklch(0.99 0.008 75);
+  --popover-foreground: oklch(0.25 0.06 55);
+
+  --primary: var(--navy);
+  --primary-foreground: var(--ivory);
+
+  --secondary: oklch(0.93 0.02 75);
+  --secondary-foreground: var(--navy);
+
+  --muted: oklch(0.94 0.02 75);
+  --muted-foreground: oklch(0.40 0.05 55);
+
+  --accent: oklch(0.88 0.05 75);
+  --accent-foreground: var(--navy);
+
+  --destructive: oklch(0.55 0.18 27);
+  --destructive-foreground: var(--ivory);
+
+  --border: oklch(0.86 0.02 75);
+  --input: oklch(0.86 0.02 75);
+  --ring: var(--gold);
+}
+
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(at 0% 0%, color-mix(in oklab, var(--color-sky) 8%, transparent), transparent 45%),
+      radial-gradient(at 100% 100%, color-mix(in oklab, var(--color-navy) 5%, transparent), transparent 50%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+  }
+  h1 { font-size: clamp(2.25rem, 4.5vw, 3.75rem); }
+  h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+  h3 { font-size: clamp(1.25rem, 2vw, 1.625rem); }
+  ::selection { background: color-mix(in oklab, var(--color-gold) 40%, transparent); }
+}
+
+
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  max-width: 1280px;
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+@utility display-serif {
+  font-family: var(--font-serif);
+  font-weight: 450;
+  font-style: normal;
+  letter-spacing: 0.005em;
+  line-height: 1.7;
+}
+
+@utility display-serif-italic {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+@utility heading-trajan {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 2rem;
+  background: var(--color-navy);
+  color: var(--color-primary-foreground);
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-navy);
+  &:hover { background: transparent; color: var(--color-navy); }
+}
+
+@utility btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 2rem;
+  background: transparent;
+  color: var(--color-navy);
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-gold);
+  &:hover { background: var(--color-gold); color: var(--color-gold-foreground); }
+}
+
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 2rem;
+  background: transparent;
+  color: var(--color-navy);
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-navy);
+  &:hover { background: var(--color-navy); color: var(--color-primary-foreground); }
+}
+
+@utility divider-gold {
+  display: inline-block;
+  width: 56px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+@utility hairline {
+  height: 1px;
+  background: color-mix(in oklab, var(--color-navy) 25%, transparent);
+}
+
+@utility section-pad {
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+
+@utility link-underline {
+  position: relative;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  color: var(--color-navy);
+  transition: color 0.25s;
+  &:hover { color: var(--color-gold); }
+}
